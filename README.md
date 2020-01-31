@@ -1,6 +1,8 @@
 # NEtwork Surveillance Tool
 ## パケットキャプチャを用いたネットワーク解析用GUIアプリケーション
-
+## 動作環境
+Linux系OS (パケットキャプチャのため管理者権限が必要)<br>
+CentOS,Ubuntu,Mac OS など
 
 ## セットアップについて
 
