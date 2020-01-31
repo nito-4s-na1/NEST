@@ -1,0 +1,71 @@
+QT       += core gui charts
+QT       += sql
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+CONFIG += c++11
+
+# The following define makes your compiler emit warnings if you use
+# any Qt feature that has been marked deprecated (the exact warnings
+# depend on your compiler). Please consult the documentation of the
+# deprecated API in order to know how to port your code away from it.
+DEFINES += QT_DEPRECATED_WARNINGS
+
+# You can also make your code fail to compile if it uses deprecated APIs.
+# In order to do so, uncomment the following line.
+# You can also select to disable deprecated APIs only up to a certain version of Qt.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+
+SOURCES += \
+    chart.cpp \
+    datalist.cpp \
+    deviceselect.cpp \
+    drilldownchart.cpp \
+    drilldownslice.cpp \
+    login.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    packet.cpp \
+    packetlistmodel.cpp \
+    table.cpp
+
+HEADERS += \
+    chart.h \
+    datalist.h \
+    deviceselect.h \
+    drilldownchart.h \
+    drilldownslice.h \
+    login.h \
+    mainwindow.h \
+    packet.h \
+    packetlistmodel.h \
+    table.h
+
+FORMS += \
+    datalist.ui \
+    deviceselect.ui \
+    login.ui \
+    mainwindow.ui \
+    table.ui
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../usr/local/lib/release/ -lpacketmachine
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../usr/local/lib/debug/ -lpacketmachine
+else:unix: LIBS += -L$$PWD/../../../../../usr/local/lib/ -lpacketmachine
+
+INCLUDEPATH += $$PWD/../../../../../usr/local/include
+DEPENDPATH += $$PWD/../../../../../usr/local/include
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../usr/lib64/release/ -lpcap
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../usr/lib64/debug/ -lpcap
+else:unix: LIBS += -L$$PWD/../../../../../usr/lib64/ -lpcap
+
+INCLUDEPATH += $$PWD/../../../../../usr/include/pcap
+DEPENDPATH += $$PWD/../../../../../usr/include/pcap
+
+RESOURCES += \
+    ICON_Images.qrc

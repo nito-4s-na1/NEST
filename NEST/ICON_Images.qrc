@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ArtWork/NEST_Logo.png</file>
+        <file>ArtWork/Graph_icon.png</file>
+        <file>ArtWork/NEST_Font_Logo.png</file>
+        <file>ArtWork/Restart_icon.png</file>
+        <file>ArtWork/Stop_icon.png</file>
+        <file>ArtWork/Pi_graph.png</file>
+        <file>ArtWork/Database.png</file>
+    </qresource>
+</RCC>
