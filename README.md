@@ -15,7 +15,7 @@ CentOS,Ubuntu,Mac OS など
 4. packetmachine<br>
 以下のリンクのREADMEのHow To Use を参考にインストールして下さい<br>
 
-PacketMachine<br>
+PacketMachine -Masayoshi Mizutani<br>
 https://github.com/m-mizutani/packetmachine<br>
 
 ### セットアップ方法の例　(CentOS7の場合)
