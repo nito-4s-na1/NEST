@@ -28,7 +28,10 @@ $ sudo yum install -y libpcap libpcap_devel
 からQtをインストールします．
 
 ## データベースのセットアップ
-NESTはPostgreSQLを使用しているため，PostgreSQLのインストール，セッティングが必要です．
+NESTはPostgreSQLを使用しているため，PostgreSQLのインストール，セッティングが必要です．<br>
+### セッティング方法(CentOS７の場合)
+以下のセッティング手順はhttps://qiita.com/mkyz08/items/519bd8d6a7140c8ed57e<br>
+を参考にしています．ファイルの書き換える場所等がわからない場合はリンク先を参照してください．
 1. PostgreSQLのインストール
 PostgreSQL11のインストールのため，ターミナルで以下のコマンドを実行します．
 ```
@@ -50,8 +53,7 @@ PostgreSQL11のインストールのため，ターミナルで以下のコマ�
 # cat /data/PG_VERSION //PostgreSQLのバージョンが 11であることを確認
 11
 ```
-これらのセッティング手順はhttps://qiita.com/mkyz08/items/519bd8d6a7140c8ed57e<br>
-を参考にしています．ファイルの書き換える場所等がわからない場合はリンク先を参照してください．
+
 
 3. パスの追加
 以下の通りにファイルを書き換え，パスを追加します
