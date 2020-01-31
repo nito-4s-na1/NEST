@@ -27,7 +27,7 @@ https://github.com/m-mizutani/packetmachine<br>
 qmake NEST.pro
 make
 ```
-するとビルドが完了し，実行ファイルが生成されます．
+するとビルドが完了し，実行ファイルが生成されます．<br>
 2. QTCreatorを利用する方法
 QTCreatorを開き，メニューバーのファイル→新しいプロジェクトを開く　からNEST.proを選択して開きます<br>
 プロジェクトを開けたら，メニューバーのビルドからビルドすると，実行ファイルが生成されます．
