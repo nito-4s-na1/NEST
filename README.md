@@ -19,6 +19,18 @@ CentOS,Ubuntu,Mac OS など
 PacketMachine<br>
 https://github.com/m-mizutani/packetmachine<br>
 
+## ビルドについて
+ビルドはqmake,makeを用いる方法とQt付属のQtCreatorを用いる方法の2種類があります
+1. qmake,makeを用いる方法
+ターミナルでNESTに移動し，以下のコマンドを実行
+```
+qmake NEST.pro
+make
+```
+するとビルドが完了し，実行ファイルが生成されます．
+2. QTCreatorを利用する方法
+QTCreatorを開き，メニューバーのファイル→新しいプロジェクトを開く　からNEST.proを選択して開きます<br>
+プロジェクトを開けたら，メニューバーのビルドからビルドすると，実行ファイルが生成されます．
 
 ## ロゴ
 ![LOGO](https://user-images.githubusercontent.com/52374179/73547018-84efcf00-4481-11ea-90fc-feb1ecf00464.png)
