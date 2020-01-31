@@ -22,17 +22,78 @@ https://github.com/m-mizutani/packetmachine<br>
 ### セットアップ方法の例　(CentOS7の場合)
 ターミナルで以下のコマンドを実行し，必要なライブラリをインストールします．
 ```
-sudo yum install -y libpcap libpcap_devel 
+$ sudo yum install -y libpcap libpcap_devel 
 ```
 また，<br>https://www.qt.io/download-qt-installer?hsCtaTracking=7ac7660e-f6f1-4d80-ae94-772be5615b6c|e1da64a4-2546-4fee-b31c-0c9d9eb85019<br>
 からQtをインストールします．
+
+## データベースのセットアップ
+NESTはPostgreSQLを使用しているため，PostgreSQLのインストール，セッティングが必要です．
+1. PostgreSQLのインストール
+PostgreSQL11のインストールのため，ターミナルで以下のコマンドを実行します．
+```
+# yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+# yum -y install postgresql11-server postgresql11-contrib
+# yum -y install postgresql-devel
+```
+
+2. データベースクラスタの生成
+/usr/lib/systemd/system/postgresql-11.serviceを以下のように書き換え，リロードします．
+```
+# vi /usr/lib/systemd/system/postgresql-11.service
+
+− Environment=PGDATA=/var/lib/pgsql/11/data/
++ Environment=PGDATA=/data/
+
+# systemctl daemon-reload
+# PGSETUP_INITDB_OPTIONS="-E UTF8 --no-locale" /usr/pgsql-11/bin/postgresql-11-setup initdb
+# cat /data/PG_VERSION //PostgreSQLのバージョンが 11であることを確認
+11
+```
+
+3. パスの追加
+以下の通りにファイルを書き換え，パスを追加します
+```
+# vi /var/lib/pgsql/.pgsql_profile
++ PATH=/usr/pgsql-11/bin:$PATH
++ export PATH
+```
+書き換えたパスを読み込み，PostgreSQlをスタートします．
+```
+# source ~/.bash_profile
+# systemctl start postgresql-11
+```
+4. ソフトウェアからの接続を許可
+/data/postgresql.confと/data/pg_hba.confを書き換え，ソフトウェアからの接続を可能にします．
+```
+# vi /data/postgresql.conf
+
+− #listen_addresses = 'localhost'
++ listen_addresses = '*'
+
+# vi /data/pg_hba.conf
+# "local" is for Unix domain socket connections only
+− local all all ident
++ local all all trust
+# IPv4 local connections:
+− host all all 127.0.0.1/32 ident
++ host all all 127.0.0.1/32 trust
+# IPv6 local connections:
+− host all all ::1/128 ident
++ host all all ::1/128 trust
+```
+書き換えが完了したら，PostgreSQLをリスタートします
+```
+# systemctl restart postgresql.service
+```
+
 ## ビルドについて
 ビルドはqmake,makeを用いる方法とQt付属のQtCreatorを用いる方法の2種類があります
 ### 1.qmake,makeを用いる方法
 ターミナルでNESTに移動し，以下のコマンドを実行
 ```
-qmake NEST.pro
-make
+$ qmake NEST.pro
+$ make
 ```
 するとビルドが完了し，実行ファイルが生成されます．<br>
 ### 2.QTCreatorを利用する方法
