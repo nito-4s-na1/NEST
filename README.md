@@ -19,6 +19,13 @@ CentOS,Ubuntu,Mac OS など
 PacketMachine<br>
 https://github.com/m-mizutani/packetmachine<br>
 
+### セットアップ方法の例　(CentOS7の場合)
+ターミナルで以下のコマンドを実行し，必要なライブラリをインストールします．
+```
+sudo yum install -y libpcap libpcap_devel 
+```
+また，<br>https://www.qt.io/download-qt-installer?hsCtaTracking=7ac7660e-f6f1-4d80-ae94-772be5615b6c|e1da64a4-2546-4fee-b31c-0c9d9eb85019<br>
+からQtをインストールします．
 ## ビルドについて
 ビルドはqmake,makeを用いる方法とQt付属のQtCreatorを用いる方法の2種類があります
 ### 1.qmake,makeを用いる方法
