@@ -55,8 +55,10 @@ PostgreSQL11のインストールのため，ターミナルで以下のコマ�
 
 
 3. パスの追加
-以下の通りにファイルを書き換え，パスを追加します
+起動前にファイルを書き換え，パスを追加します
 ```
+# su - postgres
+
 # vi /var/lib/pgsql/.pgsql_profile
 + PATH=/usr/pgsql-11/bin:$PATH
 + export PATH
@@ -66,7 +68,27 @@ PostgreSQL11のインストールのため，ターミナルで以下のコマ�
 # source ~/.bash_profile
 # systemctl start postgresql-11
 ```
-4. ソフトウェアからの接続を許可
+4. ユーザとデータべースの作成
+ユーザとデータベースを作成します．
+```
+$ createuser --login --pwprompt ユーザ名
+Enter password for new role: 
+Enter it again:
+
+$ createdb --owner=オーナーとなるユーザ名 データベース名
+```
+5.暗号化の有効化
+以下のコマンドを実行し，拡張を有効化
+```
+postgres=# create extension pgcrypto;
+```
+作成したユーザをスーパーユーザにして拡張を有効化
+```
+postgres=# ALTER ROLE ユーザ名 SUPERUSER;
+ユーザ名=# create extension pgcrypto;
+```
+
+6. ソフトウェアからの接続を許可
 /data/postgresql.confと/data/pg_hba.confを書き換え，ソフトウェアからの接続を可能にします．
 ```
 # vi /data/postgresql.conf
@@ -78,6 +100,7 @@ PostgreSQL11のインストールのため，ターミナルで以下のコマ�
 # "local" is for Unix domain socket connections only
 − local all all ident
 + local all all trust
++ local db名　ユーザ名 md5
 # IPv4 local connections:
 − host all all 127.0.0.1/32 ident
 + host all all 127.0.0.1/32 trust
@@ -89,6 +112,7 @@ PostgreSQL11のインストールのため，ターミナルで以下のコマ�
 ```
 # systemctl restart postgresql.service
 ```
+
 
 ## ビルドについて
 ビルドはqmake,makeを用いる方法とQt付属のQtCreatorを用いる方法の2種類があります
