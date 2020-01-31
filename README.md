@@ -34,3 +34,4 @@ QTCreatorを開き，メニューバーのファイル→新しいプロジェ�
 
 ## ロゴ
 ![LOGO](https://user-images.githubusercontent.com/52374179/73547018-84efcf00-4481-11ea-90fc-feb1ecf00464.png)
+Designed by Kenta Takahashi
