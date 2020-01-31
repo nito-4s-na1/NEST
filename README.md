@@ -77,7 +77,7 @@ Enter it again:
 
 $ createdb --owner=オーナーとなるユーザ名 データベース名
 ```
-5.暗号化の有効化
+5. 暗号化の有効化
 以下のコマンドを実行し，拡張を有効化
 ```
 postgres=# create extension pgcrypto;
@@ -112,7 +112,7 @@ postgres=# ALTER ROLE ユーザ名 SUPERUSER;
 ```
 # systemctl restart postgresql.service
 ```
-
+以上で設定は完了です．
 
 ## ビルドについて
 ビルドはqmake,makeを用いる方法とQt付属のQtCreatorを用いる方法の2種類があります
