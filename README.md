@@ -1,8 +1,8 @@
 # NEST NEtwork Surveillance Tool
-##パケットキャプチャを用いたネットワーク解析用GUIアプリケーション
+## パケットキャプチャを用いたネットワーク解析用GUIアプリケーション
 
 
-##セットアップについて
+## セットアップについて
 packetmachine を以下のリンクのREADMEのHow To Use を参考にインストールして下さい
 
 PacketMachine
