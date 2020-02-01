@@ -81,6 +81,10 @@ postgres=# create role ユーザ名 with login password 'パスワード';
 5. 暗号化の有効化
 以下のコマンドを実行し，拡張を有効化
 ```
+# yum install postgresql11-contrib
+# su - postgres
+-bash-4.2$ psql postgres ユーザ名
+
 postgres=# create extension pgcrypto;
 ```
 6. ソフトウェアからの接続を許可
