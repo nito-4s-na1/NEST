@@ -68,14 +68,16 @@ PostgreSQL11のインストールのため，ターミナルで以下のコマ�
 # source ~/.bash_profile
 # systemctl start postgresql-11
 ```
-4. ユーザとデータべースの作成
+4. ユーザの作成
 ユーザを作成します．
 ```
-$ su - postgres
+# su - postgres
 -bash-4.2$ psql
 postgres=# create role ユーザ名 with login password 'パスワード';
 
 ```
+ここで設定したユーザ名とパスワードは、ソフトウェアのユーザ登録の際にも使うので、必ず覚えておいてください。
+
 5. 暗号化の有効化
 以下のコマンドを実行し，拡張を有効化
 ```
