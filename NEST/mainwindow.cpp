@@ -6,7 +6,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
-
 //QString s="testdesu";
 
 QT_CHARTS_USE_NAMESPACE
@@ -62,6 +61,8 @@ void MainWindow::select(){
 }
 
 void MainWindow::database_connection(){
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+
     std::ostringstream s1;
     std::ostringstream s2;
     std::ostringstream s3;
@@ -83,7 +84,6 @@ void MainWindow::database_connection(){
           db.setPassword(password);
           bool ok = db.open();
           if(ok != true) QMessageBox::critical(this,"Data Insert","Data Insert Faild!");
-          else QMessageBox::information(this,"Data Insert","Data Insert Completed!");
 
         QSqlQuery query(db);
         /*create table*/
@@ -168,6 +168,8 @@ void MainWindow::database_connection(){
             qWarning() << query.lastError();
         }
         db.close();
+        QApplication::setOverrideCursor(Qt::ArrowCursor);
+        QMessageBox::information(this,"Data Insert","Data Insert Completed!");
 }
 
 ListModel* MainWindow::getModel(){

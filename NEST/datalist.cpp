@@ -41,15 +41,40 @@ void DataList::on_pushButton_clicked()
     t->show();
 
 }
+//delete table
+void DataList::on_pushButton_clicked_2()
+{
+    QListWidgetItem *pItem = listWidget->currentItem();
+    str2 = pItem->text();
+    int res = QMessageBox::question(this, tr("Delete"), tr("Do you really want to delete?"));
+    if (res == QMessageBox::Yes){
+        delete pItem;
+        db = QSqlDatabase::addDatabase("QPSQL");
+        db.setHostName("localhost");
+        db.setDatabaseName("postgres");
+        db.setUserName(username);
+        db.setPassword(password);
+        if(!db.open()) qDebug() << "connection faild";
+        QSqlQuery query(db);
+        if (query.exec("drop table "+str2)) {
+            if (!query.exec()) {
+                qWarning() << query.lastError();
+                qInfo() << query.lastQuery() << query.boundValues();
+            }
+        } else {
+            qWarning() << query.lastError();
+        }
+        db.close();
+    }
+}
 
 void DataList::DBList(){
     db = QSqlDatabase::addDatabase("QPSQL");
     db.setHostName("localhost");
     db.setDatabaseName("postgres");
-    db.setUserName("testuser");
-    db.setPassword("kinako");
-    if(db.open()) qDebug() << "db connection";
-    else qDebug() << "connection error";
+    db.setUserName(username);
+    db.setPassword(password);
+    if(!db.open()) qDebug() << "connection faild";
     /*db*/
     QStringList Tables;
     QSqlQuery query(db);
@@ -66,6 +91,7 @@ void DataList::DBList(){
     } else {
         qWarning() << query.lastError();
     }
+    db.close();
 
     QStringList list;
         list << Tables;
@@ -77,13 +103,13 @@ void DataList::DBList(){
 
     QBoxLayout* box = new QBoxLayout(QBoxLayout::TopToBottom);
     box->addWidget(listWidget);
-//    box->addWidget(lineEdit);
+    box->addWidget(lineEdit);
     QPushButton *button=new QPushButton("Open");
-//    QPushButton *button2=new QPushButton("Delete");
+    QPushButton *button2=new QPushButton("Delete");
     box->addWidget(button);
-//    box->addWidget(button2);
+    box->addWidget(button2);
     QObject::connect(button,SIGNAL(clicked()),this,SLOT(on_pushButton_clicked()));
-//    QObject::connect(button2,SIGNAL(clicked()),this,SLOT(on_pushButton_clicked_2()));
+    QObject::connect(button2,SIGNAL(clicked()),this,SLOT(on_pushButton_clicked_2()));
     setLayout(box);
 
 //    QStandardItem * item=NULL;
@@ -93,8 +119,6 @@ void DataList::DBList(){
     //connect database
 
      //
-
-    db.close();
 }
 
 void DataList::setUsername(QString a){

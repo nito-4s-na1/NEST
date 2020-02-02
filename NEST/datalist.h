@@ -39,6 +39,7 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+    void on_pushButton_clicked_2();
 
 private:
     Ui::DataList *ui;
@@ -52,6 +53,7 @@ private:
     QString selectedName;
     table *t;
     QString str;
+    QString str2;
     QString username;
     QString password;
 
